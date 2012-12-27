@@ -5,10 +5,12 @@ from lookups import registered_lookups
 from core import AutocompleteError
 from django.forms.fields import Field, CharField
 from django.forms.models import ModelMultipleChoiceField
+from django.forms import Media
 from widgets import AutocompleteTextInput, AutocompleteSelect, AutocompleteSelectMultiple
 from django.forms import ValidationError
 from django.db.models import Model
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 class AutocompleteFieldError(AutocompleteError):
     pass
@@ -53,6 +55,10 @@ class AutocompleteField(object):
         in this field.
         """
         self._request = request
+
+    @property
+    def media(self):
+        return Media(css={'all': (settings.JACKFROST_JQUERYUI_CSS,)}, js=(settings.JACKFROST_JQUERY_LIB, settings.JACKFROST_JQUERYUI_LIB))
 
     @staticmethod
     def set_request_in_each_field(form, request):
