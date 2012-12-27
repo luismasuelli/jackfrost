@@ -1,7 +1,8 @@
+#coding: utf-8
 from django.db import models
 
 from django.db import models
-import dick_jqac_json
+import jackfrost
 
 class Language(models.Model):
     name = models.CharField(max_length=50, null=False)
@@ -83,9 +84,9 @@ class Speaks(models.Model):
 
 class SpeakerForm(dick_jqac_json.forms.AutocompleteModelForm):
 
-    name = dick_jqac_json.fields.AutocompleteCharField('test_app.speakers')
-    group = dick_jqac_json.fields.AutocompleteModelChoiceField('test_app.groups')
-    languages = dick_jqac_json.fields.AutocompleteModelMultipleChoiceField('test_app.languages')
+    name = jackfrost.fields.AutocompleteCharField('test_app.speakers')
+    group = jackfrost.fields.AutocompleteModelChoiceField('test_app.groups')
+    languages = jackfrost.fields.AutocompleteModelMultipleChoiceField('test_app.languages')
 
     class Meta:
         model = Speaker

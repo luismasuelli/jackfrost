@@ -1,7 +1,6 @@
 #coding: utf-8
 from django.conf.urls.defaults import patterns, include, url
 from jackfrost import lookups
-from views import *
 from models import Speaker, Group, Language
 
 lookups.register(
