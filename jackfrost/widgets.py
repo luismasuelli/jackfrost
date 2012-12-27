@@ -63,9 +63,7 @@ class AutocompleteTextInput(AutocompleteWidget, TextInput):
         <script>
           (function($){
             $(function(){
-              $('#%s').autocomplete({
-                source: "%s"
-              });
+              jackfrost_input($, %s, %s);
             });
           })(jQuery);
         </script>
