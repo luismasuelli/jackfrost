@@ -2,7 +2,6 @@ __author__ = 'Usuario'
 from django.forms import Media
 from django.forms import Form
 from django.forms.models import ModelForm
-from widgets import JQueryWidget
 
 class JQueryFormTrait(object):
     JQUERY_VERSION = "1.6.2"
