@@ -4,17 +4,19 @@ from lookups import registered_lookups
 from core import AutocompleteError
 from django.forms.widgets import TextInput, SelectMultiple, Input
 from django.utils.safestring import mark_safe
-from dick_jqbw.widgets import JQueryWidget
 from django.forms import Media
 from django.utils.encoding import force_unicode
 from django.forms.util import flatatt
+from django.forms.widgets import Widget
 from django.utils import simplejson
+import uuid
 
 
 class AutocompleteWidgetError(AutocompleteError):
     pass
 
-class AutocompleteWidget(JQueryWidget):
+
+class AutocompleteWidget(Widget):
 
     class Media:
         css = {}
@@ -24,12 +26,22 @@ class AutocompleteWidget(JQueryWidget):
         super(AutocompleteWidget, self).__init__(attrs)
         self._lookup_name = lookup_name
 
+    def _must_have_id(self, attrs=None):
+        uniqid = uuid.uuid4()
+        if isinstance(attrs, dict):
+            if not attrs.has_key('id'):
+                attrs['id'] = u'jqbasewidget_id_' + uniqid
+            return attrs
+        else:
+            return dict(id=u'jqbasewidget_id_' + uniqid)
+
     def _get_lookup(self):
         try:
             global registered_lookups
             return registered_lookups[self._lookup_name]
         except Exception as e:
-            raise AutocompleteWidgetError("Unregistered '%s' autocomplete lookup" % name)
+            raise AutocompleteWidgetError("Unregistered '%s' autocomplete lookup" % self._lookup_name)
+
 
 class AutocompleteTextInput(AutocompleteWidget, TextInput):
     """
@@ -64,6 +76,7 @@ class AutocompleteTextInput(AutocompleteWidget, TextInput):
         """
         texto = autocomplete_textinput_template % (id, url)
         return mark_safe(texto)
+
 
 class AutocompleteSelect(AutocompleteWidget, Input):
     """
