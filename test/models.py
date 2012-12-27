@@ -1,8 +1,6 @@
 #coding: utf-8
 from django.db import models
-
-from django.db import models
-import jackfrost
+from jackfrost.fields import AutocompleteCharField, AutocompleteModelChoiceField, AutocompleteModelMultipleChoiceField
 
 class Language(models.Model):
     name = models.CharField(max_length=50, null=False)
@@ -82,11 +80,11 @@ class Speaks(models.Model):
 #de control de error 403 o 404 que la consultan (ver urls.py para mas detalles)).
 
 
-class SpeakerForm(dick_jqac_json.forms.AutocompleteModelForm):
+class SpeakerForm(models.forms.ModelForm):
 
-    name = jackfrost.fields.AutocompleteCharField('test_app.speakers')
-    group = jackfrost.fields.AutocompleteModelChoiceField('test_app.groups')
-    languages = jackfrost.fields.AutocompleteModelMultipleChoiceField('test_app.languages')
+    name = AutocompleteCharField('test_app.speakers')
+    group = AutocompleteModelChoiceField('test_app.groups')
+    languages = AutocompleteModelMultipleChoiceField('test_app.languages')
 
     class Meta:
         model = Speaker
