@@ -7,7 +7,7 @@ import os
 ABSOLUTE_PATH = os.path.dirname(__file__) + '/..'
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Luis Masuelli', 'malavon_despana@hotmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'jackfrost',
+    'test'
 )
 
 # A sample logging configuration. The only tangible logging
