@@ -169,7 +169,7 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
         after_add = attrs['after_add'] or 'undefined'
         before_rem = attrs['before_del'] or 'undefined'
         after_rem = attrs['after_del'] or 'undefined'
-        renderer = attrs['renderer'] or 'undefined'
+        custom_renderer = attrs['renderer'] or 'undefined'
         autocomplete_m2m_template = u"""
         <script>
           (function($)
@@ -190,5 +190,5 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
             after_add,
             before_rem,
             after_rem,
-            renderer
+            custom_renderer
         ))
