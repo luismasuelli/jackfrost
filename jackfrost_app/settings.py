@@ -3,6 +3,9 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+import os
+ABSOLUTE_PATH = os.path.dirname(__file__)
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -11,11 +14,11 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'jackfrost_test',                      # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': 'aamd532.dll',                  # Not used with sqlite3.
+        'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
@@ -28,7 +31,7 @@ TIME_ZONE = 'America/Argentina/Buenos_Aires'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'es-ar'
+LANGUAGE_CODE = 'es-AR'
 
 SITE_ID = 1
 
