@@ -101,10 +101,10 @@ class AutocompleteSelect(AutocompleteWidget, Input):
         url_ac = self._get_lookup().reverse_autocomplete_url()
         url_init = self._get_lookup().reverse_fk_initial_url()
         id = attrs['id']
-        before_set = attrs['before_set']
-        after_set = attrs['after_set']
-        before_del = attrs['before_del']
-        after_del = attrs['after_del']
+        before_set = attrs['before_set'] or 'undefined'
+        after_set = attrs['after_set'] or 'undefined'
+        before_del = attrs['before_del'] or 'undefined'
+        after_del = attrs['after_del'] or 'undefined'
         autocomplete_fk_template = u"""
         <script>
           (function($){
@@ -163,10 +163,10 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
         url_ac = self._get_lookup().reverse_autocomplete_url()
         url_init = self._get_lookup().reverse_m2m_initial_url()
         id = attrs['id']
-        before_add = attrs['before_add']
-        after_add = attrs['after_add']
-        before_rem = attrs['before_del']
-        after_rem = attrs['after_del']
+        before_add = attrs['before_add'] or 'undefined'
+        after_add = attrs['after_add'] or 'undefined'
+        before_rem = attrs['before_del'] or 'undefined'
+        after_rem = attrs['after_del'] or 'undefined'
         autocomplete_m2m_template = u"""
         <script>
           (function($)
