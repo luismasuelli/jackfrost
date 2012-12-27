@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 from django.core.urlresolvers import reverse
 
 from clean import validate_fk, validate_m2m
