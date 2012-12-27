@@ -20,7 +20,7 @@ class AutocompleteWidget(Widget):
 
     class Media:
         css = {}
-        js = ('js/JSON.js', 'js/dick_jqac.js')
+        js = ('js/JSON.js', 'js/jackfrost.js')
 
     def __init__(self, lookup_name, attrs=None):
         super(AutocompleteWidget, self).__init__(attrs)
@@ -45,11 +45,7 @@ class AutocompleteWidget(Widget):
 
 class AutocompleteTextInput(AutocompleteWidget, TextInput):
     """
-    Cuadro de texto al que se le aplica una funcion de autocompletar
-    haciendo uso del plugin de jquery de autocompletar.
-
-    Fuera de eso es un cuadro de texto normal, y sus eventos seran
-    los de siempre.
+    Simple text-box with jquery AC enabled features.
     """
 
     def __init__(self, lookup_name, attrs=None):
@@ -80,12 +76,7 @@ class AutocompleteTextInput(AutocompleteWidget, TextInput):
 
 class AutocompleteSelect(AutocompleteWidget, Input):
     """
-    Componente de seleccion simple basado en el plugin de
-    autocompletar de jquery, que obtiene los datos de una
-    fuente de datos determinada.
-
-    Tambien puede especificarsele un valor inicial el cual
-    es asignado junto con la carga del componente.
+    Simple model choice field whose value comes from a source and validates against it.
     """
 
     def __init__(self, lookup_name, attrs=None):
@@ -118,11 +109,12 @@ class AutocompleteSelect(AutocompleteWidget, Input):
         after_set = attrs['after_set'] or 'undefined'
         before_del = attrs['before_del'] or 'undefined'
         after_del = attrs['after_del'] or 'undefined'
+        custom_renderer = attrs['renderer'] or 'undefined'
         autocomplete_fk_template = u"""
         <script>
           (function($){
             $(function(){
-              JQACSelect($, %s, %s, %s, %s, %s, %s, %s, %s);
+              JQACSelect($, %s, %s, %s, %s, %s, %s, %s, %s, %s);
             });
           })(jQuery);
         </script>
@@ -135,18 +127,15 @@ class AutocompleteSelect(AutocompleteWidget, Input):
             before_set,
             after_set,
             before_del,
-            after_del
+            after_del,
+            custom_renderer
         ))
 
 
 class AutocompleteSelectMultiple(AutocompleteWidget, Input):
     """
-    Componente de seleccion multiple basado en el plugin de
-    autocompletar de jquery, que obtiene los datos de una
-    fuente de datos determinada.
-
-    Tambien puede especificarsele un valor inicial el cual
-    es asignado junto con la carga del componente.
+    Multiple model choice field with a select multiple and a text enabled with jquery AC capabilities.
+    Validates the list of values against a source.
     """
 
     def __init__(self, lookup_name, attrs=None):
@@ -180,12 +169,13 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
         after_add = attrs['after_add'] or 'undefined'
         before_rem = attrs['before_del'] or 'undefined'
         after_rem = attrs['after_del'] or 'undefined'
+        renderer = attrs['renderer'] or 'undefined'
         autocomplete_m2m_template = u"""
         <script>
           (function($)
           {
             $(function(){
-              JQACSelectMultiple($, %s, %s, %s, %s, %s, %s, %s, %s);
+              JQACSelectMultiple($, %s, %s, %s, %s, %s, %s, %s, %s, %s);
             });
           })
           (jQuery);
@@ -199,5 +189,6 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
             before_add,
             after_add,
             before_rem,
-            after_rem
+            after_rem,
+            renderer
         ))
