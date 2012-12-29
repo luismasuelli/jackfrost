@@ -183,7 +183,7 @@ class AutocompleteModelMultipleChoiceField(AutocompleteField, Field):
         if not isinstance(values, (list, tuple)):
             raise ValidationError(self.error_messages['list'])
 
-        return lookup.clean_m2m([self._single_value_to_python(v) for v in values], self._request, errors)
+        return lookup.clean_m2m((self._single_value_to_python(v) for v in values), self._request, errors)
 
     def clean(self, values):
         if self.required and not values:

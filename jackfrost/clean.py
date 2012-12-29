@@ -26,10 +26,11 @@ def validate_fk(queryset, request, filter, value, to_field, error_messages):
 def validate_m2m(queryset, request, filter, values, to_field, error_messages):
     v = 0
     try:
+        vs = []
         t = query_filter(request, queryset, filter)
         for v in values:
-            t.get(**{to_field: v})
-        return t
+            vs.append(t.get(**{to_field: v}))
+        return vs
     except ObjectDoesNotExist:
         message = error_messages['invalid_choice'] if 'invalid_choice' in error_messages else _(u'Select a valid choice. %s is not one of the available choices.') % v
         x = ValidationError(message)
