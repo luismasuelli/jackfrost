@@ -113,7 +113,7 @@ lookups.register(
 
 urlpatterns = patterns('',
     url(r'^send/', sample_form, name="sampleform"),
-    url(r'^ok/', sample_form_ok, name="sampleformok"),
+    url(r'^ok/(\d+)/', sample_form_ok, name="sampleformok"),
   )\
   + lookups.registered_lookups['test_app.languages'].urls\
   + lookups.registered_lookups['test_app.speakers'].urls\

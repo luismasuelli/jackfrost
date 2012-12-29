@@ -105,7 +105,7 @@ function __jackfrost_singlechoice_after_del(wrapper, key) {
 
 function __jackfrost_singlechoice_setvalue(item, wrapper_text, wrapper_hidden) {
     if (!__jackfrost_singlechoice_before_set(wrapper_hidden, item)) return;
-    wrapper_hidden.val(item.key);
+    wrapper_hidden.val(JSON.stringify(item.key));
     wrapper_text.addClass('ac-item-selected').prop("readonly", true).val(item.label);
     __jackfrost_singlechoice_after_set(wrapper_hidden, item);
 }

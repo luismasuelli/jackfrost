@@ -13,7 +13,7 @@ def sample_form(request):
         sf = SpeakerForm(request.POST)
         if sf.is_valid():
             speaker = sf.save()
-            return http.HttpResponseRedirect(reverse("test:sample_form_ok", args=[speaker.pk]))
+            return http.HttpResponseRedirect(reverse("sampleformok", args=[speaker.pk]))
         else:
             return render_to_response('test/form.html', {'form': sf}, context_instance=RequestContext(request))
     elif request.method == 'GET':
@@ -24,4 +24,4 @@ def sample_form(request):
 
 def sample_form_ok(request, speaker_id):
     speaker = get_object_or_404(Speaker, pk=speaker_id)
-    render_to_response('ok.html', {"speaker": speaker})
+    return render_to_response('test/ok.html', {"speaker": speaker})

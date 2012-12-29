@@ -20,16 +20,12 @@ class Speaker(models.Model):
     #(autocompletar de texto)
     name = models.CharField(max_length=50, null=False)
     #este campo buscara en una referencia multiple
-    languages = models.ManyToManyField(Language, through='Speaks', related_name='speakers')
+    languages = models.ManyToManyField(Language, related_name='speakers')
     #este campo buscara en una referencia simple
     group = models.ForeignKey(Group, null=False)
 
     def __unicode__(self):
         return self.name
-
-class Speaks(models.Model):
-    speaker = models.ForeignKey(Speaker)
-    language = models.ForeignKey(Language)
 
 #podemos crear un formulario de modelo o un formulario normal, pero si usamos controles
 #con autocompletar nuestro formulario debe ser tipo AutocompleteForm en lugar de Form,
