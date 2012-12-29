@@ -238,11 +238,10 @@ var __jackfrost_multichoice_addvalue = function(item, wrapper_list, wrapper_text
     var value = item.key;
     if (values.indexOf(value) > -1) return;
     if (!__jackfrost_multichoice_before_add(wrapper_hidden, wrapper_list, item)) return;
-    wrapper_text.val('');
     values.push(item.key);
     wrapper_hidden.val(JSON.stringify(values));
     wrapper_list.append($('<option></option>').attr('value', item.key).text(item.label));
-    __jackfrost_multichoice_after_add(wrapper_hidden, wrapper_list, iterm);
+    __jackfrost_multichoice_after_add(wrapper_hidden, wrapper_list, item);
 };
 
 var __jackfrost_multichoice_remvalue = function(pos_array, wrapper_list, wrapper_hidden) {
@@ -292,10 +291,10 @@ function jackfrost_multichoice($,
 
         wrapper_list.keydown(function(e){
             if (e.which == 46) {
-                var items = wrapper_list.children();
+                var items = wrapper_list.children("option");
                 var positions = [];
                 items.each(function(i, e) {
-                    if ($(e).is(":selected")) positions.push(i);
+                    if ($(e).is(":selected")) positions.unshift(i);
                 });
                 if (positions.length > 0) {
                     for(var posind=0; posind < positions.length; posind++) {
