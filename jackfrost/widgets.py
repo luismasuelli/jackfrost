@@ -132,7 +132,7 @@ class AutocompleteSelect(AutocompleteWidget, Input):
             simplejson.dumps(id),
             simplejson.dumps(url_ac),
             simplejson.dumps(url_init),
-            simplejson.dumps(value),
+            value,
             before_set,
             after_set,
             before_del,
@@ -167,7 +167,7 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
         final_attrs['type'] = 'text'
         textbox = mark_safe(u'<input %s />' % flatatt(final_attrs))
         hidden  = mark_safe(u'<input id="%s" type="hidden" name="%s" />' % (control_id, name))
-        lista   = mark_safe(u'<select id="%s" multiple="multiple" />' % (control_id + '-list',))
+        lista   = mark_safe(u'<select id="%s" multiple="multiple"></select>' % (control_id + '-list',))
         return textbox + hidden + u'<br/>' + lista
 
     def render_jquery_autocomplete(self, values, attrs):
@@ -196,7 +196,7 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
             simplejson.dumps(id),
             simplejson.dumps(url_ac),
             simplejson.dumps(url_init),
-            simplejson.dumps(values),
+            values,
             before_add,
             after_add,
             before_rem,

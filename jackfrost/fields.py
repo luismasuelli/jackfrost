@@ -133,6 +133,9 @@ class AutocompleteModelChoiceField(AutocompleteField, Field):
 
         return cleaned_value
 
+    def prepare_value(self, value):
+        return simplejson.dumps(value)
+
 
 class AutocompleteModelMultipleChoiceField(AutocompleteField, Field):
     """
@@ -194,3 +197,6 @@ class AutocompleteModelMultipleChoiceField(AutocompleteField, Field):
         self.run_validators(cleaned_values)
 
         return cleaned_values
+
+    def prepare_value(self, values):
+        return simplejson.dumps(values)
