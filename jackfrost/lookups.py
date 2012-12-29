@@ -23,9 +23,9 @@ def register(pattern, name, queryset, filter, field_list, limit=15, to_field_nam
     if name in registered_lookups:
         return
     lookup_urls = patterns('',
-        url(pattern % ('ac',), 'dick_jqac_json.views.autocomplete_search', name=name+'-ac', kwargs={'field_list': field_list, 'queryset' : queryset, 'limit':limit, 'filter': filter, 'to_field_name': to_field_name, 'throw403_if': throw403_if, 'throw404_if': throw404_if, 'extra_data_getter': extra_data_getter }),
-        url(pattern % ('many',), 'dick_jqac_json.views.autocomplete_m2m_initials', name=name+'-many', kwargs={'queryset' : queryset, 'filter': filter, 'to_field_name': to_field_name, 'throw403_if': throw403_if, 'throw404_if': throw404_if, 'extra_data_getter': extra_data_getter }),
-        url(pattern % ('one',), 'dick_jqac_json.views.autocomplete_fk_initial', name=name+'-one', kwargs={'queryset' : queryset, 'filter': filter, 'to_field_name': to_field_name, 'throw403_if': throw403_if, 'throw404_if': throw404_if, 'extra_data_getter': extra_data_getter }),
+        url(pattern % ('ac',), 'jackfrost.views.autocomplete_search', name=name+'-ac', kwargs={'field_list': field_list, 'queryset' : queryset, 'limit':limit, 'filter': filter, 'to_field_name': to_field_name, 'throw403_if': throw403_if, 'throw404_if': throw404_if, 'extra_data_getter': extra_data_getter }),
+        url(pattern % ('many',), 'jackfrost.views.autocomplete_m2m_initials', name=name+'-many', kwargs={'queryset' : queryset, 'filter': filter, 'to_field_name': to_field_name, 'throw403_if': throw403_if, 'throw404_if': throw404_if, 'extra_data_getter': extra_data_getter }),
+        url(pattern % ('one',), 'jackfrost.views.autocomplete_fk_initial', name=name+'-one', kwargs={'queryset' : queryset, 'filter': filter, 'to_field_name': to_field_name, 'throw403_if': throw403_if, 'throw404_if': throw404_if, 'extra_data_getter': extra_data_getter }),
     )
     lookup_validate_fk = lambda value, request, error_dict: validate_fk(queryset, request, filter, value, to_field_name, error_dict)
     lookup_validate_m2m = lambda values, request, error_dict: validate_m2m(queryset, request, filter, values, to_field_name, error_dict)

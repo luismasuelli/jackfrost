@@ -2,6 +2,7 @@
 from django.conf.urls import patterns, include, url
 from jackfrost import lookups
 from models import Speaker, Group, Language
+from views import *
 
 lookups.register(
     r'^speakers-%s/$',       #.patron url (%s se reemplaza por one|many|ac, son 3 urls).
@@ -110,7 +111,10 @@ lookups.register(
 #   que puedan ser usados en el front-end. si no se especifica entonces lo que llega como
 #   'extra' en cada elemento es un objeto json vacio.
 
-urlpatterns = patterns('',)\
+urlpatterns = patterns('',
+    url(r'^send/', sample_form, name="sampleform"),
+    url(r'^ok/', sample_form_ok, name="sampleformok"),
+  )\
   + lookups.registered_lookups['test_app.languages'].urls\
   + lookups.registered_lookups['test_app.speakers'].urls\
   + lookups.registered_lookups['test_app.groups'].urls

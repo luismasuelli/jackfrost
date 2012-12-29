@@ -56,10 +56,6 @@ class AutocompleteField(object):
         """
         self._request = request
 
-    @property
-    def media(self):
-        return Media(css={'all': (settings.JACKFROST_JQUERYUI_CSS,)}, js=(settings.JACKFROST_JQUERY_LIB, settings.JACKFROST_JQUERYUI_LIB))
-
     @staticmethod
     def set_request_in_each_field(form, request):
         """

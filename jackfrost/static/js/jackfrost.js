@@ -305,6 +305,8 @@ function jackfrost_multichoice($,
             }
         });
 
+        __jackfrost_multichoice_get_values_list(wrapper_hidden.attr('id'));
+        wrapper_hidden.val("[]");
         if (initialdata != null)
         {
             var params = {value: initialdata};
