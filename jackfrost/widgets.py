@@ -123,7 +123,7 @@ class AutocompleteSelect(AutocompleteWidget, Input):
         <script>
           (function($){
             $(function(){
-              JQACSelect($, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+              jackfrost_singlechoice($, %s, %s, %s, %s, %s, %s, %s, %s, %s);
             });
           })(jQuery);
         </script>
@@ -186,7 +186,7 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
           (function($)
           {
             $(function(){
-              JQACSelectMultiple($, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+              jackfrost_multichoice($, %s, %s, %s, %s, %s, %s, %s, %s, %s);
             });
           })
           (jQuery);

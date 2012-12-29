@@ -21,7 +21,7 @@ if not settings.configured:
 else:
     settings.JACKFROST_INSTALLED=True
     if not getattr(settings, 'JACKFROST_JQUERY_LIB', None):
-        settings.JACKFROST_JQUERY = 'js/jquery-1.6.2.min.js'
+        settings.JACKFROST_JQUERY_LIB = 'js/jquery-1.6.2.min.js'
     if not getattr(settings, 'JACKFROST_JQUERYUI_LIB', None):
         settings.JACKFROST_JQUERYUI_LIB = 'js/jquery-ui-1.8.16.custom.min.js'
     if not getattr(settings, 'JACKFROST_JQUERYUI_CSS', None):
