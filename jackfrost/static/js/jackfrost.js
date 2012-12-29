@@ -303,7 +303,15 @@ function jackfrost_multichoice($,
                     }
                 }
             }
-        });
+        }).width(
+            wrapper_text.width()
+        ).css(
+            'margin',
+            wrapper_text.css('margin')
+        ).css(
+            'left',
+            wrapper_text.css('left')
+        );
 
         __jackfrost_multichoice_get_values_list(wrapper_hidden.attr('id'));
         wrapper_hidden.val("[]");
