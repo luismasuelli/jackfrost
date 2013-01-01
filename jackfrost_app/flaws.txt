@@ -1,0 +1,6 @@
+Flaws or things to improve in this component:
+
+* the autocomplete search is only done against database. no cache is done.
+  (reason: the jQuery component does not allow multisourcing).
+* the multichoice component doesn't work against M2M relationships with THROUGH set,
+  (reason: the values are SET checking the objects against the query in the other side of the relationship, not the intermediary values).

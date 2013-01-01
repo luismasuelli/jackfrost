@@ -4,10 +4,10 @@ from django.utils import simplejson
 from django.http import HttpResponseNotFound, HttpResponseForbidden, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-def _autocomplete_error(request, throw403_if=None, throw404_if=None):
-    if not (throw403_if is None) and throw403_if(request):
+def _autocomplete_error(request, throw403_if=None, throw404_if=None, context=''):
+    if not (throw403_if is None) and throw403_if(request, context):
         return HttpResponseForbidden()
-    if not (throw404_if is None) and throw404_if(request):
+    if not (throw404_if is None) and throw404_if(request, context):
         return HttpResponseNotFound()
     return None
 
@@ -22,7 +22,7 @@ def _req_val(request, var):
     return ''
 
 def autocomplete_search(request, queryset, filter, field_list, limit=15, to_field_name='pk', throw403_if=None, throw404_if=None, extra_data_getter=None):
-    error = _autocomplete_error(request, throw403_if, throw404_if)
+    error = _autocomplete_error(request, throw403_if, throw404_if, 'ac')
     if error is not None:
         return error
     terms = _req_val(request, 'term')
@@ -30,7 +30,7 @@ def autocomplete_search(request, queryset, filter, field_list, limit=15, to_fiel
     return _json_response(json_list(search_queryset[:limit], to_field_name, extra_data_getter))
 
 def autocomplete_fk_initial(request, queryset, filter, to_field_name='pk', throw403_if=None, throw404_if=None, extra_data_getter=None):
-    error = _autocomplete_error(request, throw403_if, throw404_if)
+    error = _autocomplete_error(request, throw403_if, throw404_if, 'fk')
     if error is not None:
         return error
     value = _req_val(request, 'value')
@@ -39,7 +39,7 @@ def autocomplete_fk_initial(request, queryset, filter, to_field_name='pk', throw
 
 @csrf_exempt
 def autocomplete_m2m_initials(request, queryset, filter, to_field_name='pk', throw403_if=None, throw404_if=None, extra_data_getter=None):
-    error = _autocomplete_error(request, throw403_if, throw404_if)
+    error = _autocomplete_error(request, throw403_if, throw404_if, 'm2m')
     if error is not None:
         return error
     values = simplejson.loads(_req_val(request, 'values'))

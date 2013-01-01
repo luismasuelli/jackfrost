@@ -4,6 +4,18 @@ from jackfrost import lookups
 from models import Speaker, Group, Language
 from views import *
 
+#test function to use as filter criteria. it does not distinguish (YET)
+#the context in which it is called (autocomplete, initial FK, initial M2M)
+def spamfinder(request, context):
+    term = request.GET.get('term', '')
+    terms = term.lower().split()
+    return "spam" in terms
+
+def eggsfinder(request, context):
+    term = request.GET.get('term', '')
+    terms = term.lower().split()
+    return "eggs" in terms
+
 lookups.register(
     r'^speakers-%s/$',       #.patron url (%s se reemplaza por one|many|ac, son 3 urls).
     'test_app.speakers',     #.cualquier nombre, debemos respetarlo.
@@ -12,8 +24,10 @@ lookups.register(
                              #cuyo resultado es otro QuerySet que sea producido por
                              #%1 y basandose en datos que se obtienen de %2.
                              #poniendo None no hay filtro.
-    ('name',)                #.al menos un campo debe haber y tales deben ser
+    ('name',),               #.al menos un campo debe haber y tales deben ser
                              #visibles desde la query.
+    throw403_if=spamfinder,  #.filtro de la request que dará error "prohibido" si se busca la palabra "spam"
+    throw404_if=eggsfinder   #.filtro de la request que dará error "no encontrado" si se busca la palabra "eggs"
 )
 
 lookups.register(
@@ -24,8 +38,10 @@ lookups.register(
                              #cuyo resultado es otro QuerySet que sea producido por
                              #%1 y basandose en datos que se obtienen de %2.
                              #poniendo None no hay filtro.
-    ('name',)                #.al menos un campo debe haber y tales deben ser
+    ('name',),               #.al menos un campo debe haber y tales deben ser
                              #visibles desde la query.
+    throw403_if=spamfinder,  #.filtro de la request que dará error "prohibido" si se busca la palabra "spam"
+    throw404_if=eggsfinder   #.filtro de la request que dará error "no encontrado" si se busca la palabra "eggs"
 )
 
 lookups.register(
@@ -36,8 +52,10 @@ lookups.register(
                              #cuyo resultado es otro QuerySet que sea producido por
                              #%1 y basandose en datos que se obtienen de %2.
                              #poniendo None no hay filtro.
-    ('description',)         #.al menos un campo debe haber y tales deben ser
+    ('description',),        #.al menos un campo debe haber y tales deben ser
                              #visibles desde la query.
+    throw403_if=spamfinder,  #.filtro de la request que dará error "prohibido" si se busca la palabra "spam"
+    throw404_if=eggsfinder   #.filtro de la request que dará error "no encontrado" si se busca la palabra "eggs"
 )
 
 #registra un juego de vistas para cierto juego de datos que se accedan desde
