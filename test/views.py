@@ -10,14 +10,27 @@ from django.core.context_processors import csrf
 
 def sample_form(request):
     if request.method == 'POST':
-        sf = SpeakerForm(request.POST)
+        sf = None
+        instance_id = request.GET.get(u'speaker')
+        if instance_id is not None:
+            instance = get_object_or_404(Speaker, pk=instance_id)
+            sf = Speaker(request.POST, instance=instance)
+        else:
+            sf = SpeakerForm(request.POST)
         if sf.is_valid():
             speaker = sf.save()
             return http.HttpResponseRedirect(reverse("sampleformok", args=[speaker.pk]))
         else:
             return render_to_response('test/form.html', {'form': sf}, context_instance=RequestContext(request))
     elif request.method == 'GET':
-        return render_to_response('test/form.html', {'form': SpeakerForm()}, context_instance=RequestContext(request))
+        form = None
+        instance_id = request.GET[u'speaker']
+        if instance_id is not None:
+            instance = get_object_or_404(Speaker, pk=instance_id)
+            form = SpeakerForm(instance=instance)
+        else:
+            form = SpeakerForm()
+        return render_to_response('test/form.html', {'form': form}, context_instance=RequestContext(request))
     else:
         return http.HttpResponseNotAllowed(['GET', 'POST'])
 
