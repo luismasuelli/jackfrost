@@ -33,15 +33,21 @@ def autocomplete_fk_initial(request, queryset, filter, to_field_name='pk', throw
     error = _autocomplete_error(request, throw403_if, throw404_if, 'fk')
     if error is not None:
         return error
-    value = _req_val(request, 'value')
-    element = initial_fk(queryset, filter, request, to_field_name, value)
-    return _json_response(json_instance(element, to_field_name, extra_data_getter))
+    try:
+        value = simplejson.loads(_req_val(request, 'value'))
+        element = initial_fk(queryset, filter, request, to_field_name, value)
+        return _json_response(json_instance(element, to_field_name, extra_data_getter))
+    except simplejson.JSONDecodeError as e:
+        return _json_response(None)
 
 @csrf_exempt
 def autocomplete_m2m_initials(request, queryset, filter, to_field_name='pk', throw403_if=None, throw404_if=None, extra_data_getter=None):
     error = _autocomplete_error(request, throw403_if, throw404_if, 'm2m')
     if error is not None:
         return error
-    values = simplejson.loads(_req_val(request, 'values'))
-    elements = initial_m2m(queryset, filter, request, to_field_name, values)
-    return _json_response(json_list(elements, to_field_name, extra_data_getter))
+    try:
+        values = simplejson.loads(_req_val(request, 'values'))
+        elements = initial_m2m(queryset, filter, request, to_field_name, values)
+        return _json_response(json_list(elements, to_field_name, extra_data_getter))
+    except simplejson.JSONDecodeError as e:
+        return _json_response([])

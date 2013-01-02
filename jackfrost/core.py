@@ -19,12 +19,16 @@ def searched_queryset(queryset, filter, request, field_list, terms=''):
     return query_filter(request, queryset, filter).filter(search_filter)
 
 def initial_fk(queryset, filter, request, to_field, value):
+    if value is None:
+        return None
     try:
         return query_filter(request, queryset, filter).get(**{to_field: value})
     except ObjectDoesNotExist:
         return None
 
 def initial_m2m(queryset, filter, request, to_field, values):
+    if values is None:
+        return []
     return query_filter(request, queryset, filter).filter(**{to_field + '__in': values})
 
 def json_instance(instance, to_field, extra_data_getter=None):
