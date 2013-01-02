@@ -46,7 +46,9 @@ def autocomplete_m2m_initials(request, queryset, filter, to_field_name='pk', thr
     if error is not None:
         return error
     try:
-        values = simplejson.loads(_req_val(request, 'values'))
+        valueslist = _req_val(request, 'list')
+        valueslist = u'[' + valueslist[1: -1] + u']'
+        values = simplejson.loads(valueslist)
         elements = initial_m2m(queryset, filter, request, to_field_name, values)
         return _json_response(json_list(elements, to_field_name, extra_data_getter))
     except simplejson.JSONDecodeError as e:

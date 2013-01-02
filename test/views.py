@@ -14,7 +14,7 @@ def sample_form(request):
         instance_id = request.GET.get(u'speaker')
         if instance_id is not None:
             instance = get_object_or_404(Speaker, pk=instance_id)
-            sf = Speaker(request.POST, instance=instance)
+            sf = SpeakerForm(request.POST, instance=instance)
         else:
             sf = SpeakerForm(request.POST)
         if sf.is_valid():
@@ -24,7 +24,7 @@ def sample_form(request):
             return render_to_response('test/form.html', {'form': sf}, context_instance=RequestContext(request))
     elif request.method == 'GET':
         form = None
-        instance_id = request.GET[u'speaker']
+        instance_id = request.GET.get(u'speaker')
         if instance_id is not None:
             instance = get_object_or_404(Speaker, pk=instance_id)
             form = SpeakerForm(instance=instance)

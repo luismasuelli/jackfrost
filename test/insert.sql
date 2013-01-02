@@ -1,0 +1,2 @@
+insert into test_language(name) values ('español'), ('inglés'), ('portugués'), ('francés'), ('alemán'), ('holandés'), ('polaco'), ('noruesgo'), ('ruso'), ('chino mandarín'), ('japonés'), ('tailandés'), ('malayo'), ('hindú'), ('aymara'), ('guaraní'), ('mapuche'), ('diaguita');
+insert into test_group(description) values ('europa occidental'), ('europa oriental'), ('asia sur'), ('asia norte'), ('latinoamérica');

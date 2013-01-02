@@ -79,8 +79,8 @@ class Speaker(models.Model):
 class SpeakerForm(models.forms.ModelForm):
 
     name = AutocompleteCharField('test_app.speakers')
-    group = AutocompleteModelChoiceField('test_app.groups')
-    languages = AutocompleteModelMultipleChoiceField('test_app.languages')
+    group = AutocompleteModelChoiceField('test_app.groups', widget_attrs={'before_set': 'ss_before_set', 'after_set':'ss_after_set', 'before_del': 'ss_before_del', 'after_del': 'ss_after_del', 'renderer': 'ss_render'})
+    languages = AutocompleteModelMultipleChoiceField('test_app.languages', widget_attrs={'before_add': 'ms_before_add', 'after_add': 'ms_after_add', 'before_rem': 'ms_before_rem', 'after_rem': 'ms_after_rem', 'renderer': 'ms_render'})
 
     class Meta:
         model = Speaker

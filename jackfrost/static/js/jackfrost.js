@@ -13,7 +13,7 @@
 
 function __jackfrost_autocomplete_on_render(wrapper, ul, item) {
     var return_value = wrapper.triggerHandler('render', [ul, item]);
-    return (typeof return_value == 'undefined') ? item.label : return_value;
+    return (typeof return_value == 'undefined') ? ('<a>' + item.label + '</a>')  : return_value;
 }
 
 /**
@@ -25,7 +25,7 @@ function __jackfrost_autocomplete_on_render(wrapper, ul, item) {
 function __jackfrost_autocomplete_render(wrapper_hidden, ul, item) {
     return $( "<li></li>" )
         .data( "item.autocomplete", item )
-        .append( "<a>" + __jackfrost_autocomplete_on_render(wrapper_hidden, ul, item) + "</a>" )
+        .append(__jackfrost_autocomplete_on_render(wrapper_hidden, ul, item))
         .appendTo( ul );
 }
 
@@ -227,6 +227,12 @@ function __jackfrost_multichoice_after_rem(wrapper, listbox_wrapper, key, inlist
 
 var __jackfrost_multichoice_values_lists = {};
 
+function __jackfrost_multichoice_array_workaround(items_array) {
+    var jsonval = JSON.stringify(items_array);
+    jsonval = jsonval.substr(1, jsonval.length - 2);
+    return '(' + jsonval + ')';
+}
+
 function __jackfrost_multichoice_get_values_list(hidden_id) {
     if (!(hidden_id in __jackfrost_multichoice_values_lists)) {
         __jackfrost_multichoice_values_lists[hidden_id] = [];
@@ -250,7 +256,7 @@ var __jackfrost_multichoice_remvalue = function(pos_array, wrapper_list, wrapper
     var key = values[pos_array];
     if (!__jackfrost_multichoice_before_rem(wrapper_hidden, wrapper_list, key, pos_array)) return;
     values.splice(pos_array, 1);
-    wrapper_hidden.val(JSON.stringify(values));
+    wrapper_hidden.val(__jackfrost_multichoice_array_workaround(values));
     wrapper_list.children("option:selected").remove();
     __jackfrost_multichoice_after_rem(wrapper_hidden, wrapper_list, key, pos_array);
 };
@@ -317,7 +323,7 @@ function jackfrost_multichoice($,
         wrapper_hidden.val("[]");
         if (initialdata != null)
         {
-            var params = {values: initialdata};
+            var params = {list: __jackfrost_multichoice_array_workaround(initialdata)};
             var callback = function(data){
                 $.each(data, function(i, item){
                     __jackfrost_multichoice_addvalue(item, wrapper_list, wrapper_text, wrapper_hidden);

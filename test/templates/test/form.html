@@ -6,6 +6,55 @@
     {{ form.media }}
 </head>
 <body>
+    <script>
+        function log_console(msg) {
+            if (window.console) {
+                window.console.log(msg);
+            }
+        }
+
+        function ss_before_set(key, obj) {
+            log_console("before inserting " + key + " for " + JSON.stringify(obj));
+        }
+
+        function ss_after_set(key, obj) {
+            log_console("after inserting " + key + " for " + JSON.stringify(obj));
+        }
+
+        function ss_before_del(key) {
+            log_console("before deleting " + key);
+        }
+
+        function ss_after_del(key) {
+            log_console("after deleting " + key);
+        }
+
+        function ss_render(key, obj) {
+            log_console("rendering " + key + " with " + JSON.stringify(obj));
+            return "<a>SS Item: " + obj.label + "</a>";
+        }
+
+        function ms_before_add(key, obj) {
+            log_console("before adding " + key + " for " + JSON.stringify(obj));
+        }
+
+        function ms_after_add(key, obj) {
+            log_console("after adding " + key + " for " + JSON.stringify(obj));
+        }
+
+        function ms_before_rem(listbox, key, listbox_position) {
+            log_console("before removing " + key + " from listbox " + $(listbox).attr('id') + ' at position ' + listbox_position);
+        }
+
+        function ms_after_rem(listbox, key, listbox_position) {
+            log_console("after removing " + key + " from listbox " + $(listbox).attr('id') + ' at position ' + listbox_position);
+        }
+
+        function ms_render(key, obj) {
+            log_console("rendering " + key + " with " + JSON.stringify(obj));
+            return "<a>SS Item: " + obj.label + "</a>";
+        }
+    </script>
     <form action="" method="post">
     {% csrf_token %}
     <table>

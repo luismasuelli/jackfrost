@@ -38,10 +38,10 @@ class AutocompleteWidget(Widget):
         uniqid = uuid.uuid4()
         if isinstance(attrs, dict):
             if not attrs.has_key('id'):
-                attrs['id'] = u'jqbasewidget_id_' + uniqid
+                attrs['id'] = u'jackfrost_id_' + uniqid
             return attrs
         else:
-            return dict(id=u'jqbasewidget_id_' + uniqid)
+            return dict(id=u'jackfrost_id_' + uniqid)
 
     def _get_lookup(self):
         try:
@@ -111,6 +111,7 @@ class AutocompleteSelect(AutocompleteWidget, Input):
         return textbox + hidden
 
     def render_jquery_autocomplete(self, value, attrs):
+        attrs = self.build_attrs(attrs)
         url_ac = self._get_lookup().reverse_autocomplete_url()
         url_init = self._get_lookup().reverse_fk_initial_url()
         id = attrs['id']
@@ -171,6 +172,7 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
         return textbox + hidden + u'<br/>' + lista
 
     def render_jquery_autocomplete(self, values, attrs):
+        attrs = self.build_attrs(attrs)
         if values is None:
             values = []
         url_ac = self._get_lookup().reverse_autocomplete_url()
@@ -178,8 +180,8 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
         id = attrs['id']
         before_add = attrs.get('before_add', 'undefined')
         after_add = attrs.get('after_add', 'undefined')
-        before_rem = attrs.get('before_del', 'undefined')
-        after_rem = attrs.get('after_del', 'undefined')
+        before_rem = attrs.get('before_rem', 'undefined')
+        after_rem = attrs.get('after_rem', 'undefined')
         custom_renderer = attrs.get('renderer', 'undefined')
         autocomplete_m2m_template = u"""
         <script>

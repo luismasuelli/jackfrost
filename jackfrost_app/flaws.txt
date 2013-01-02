@@ -12,11 +12,38 @@ TO-DO:
 * error handling events for the autocomplete hit (letting the users notify theirself about the error).
 * initialization events for the fk and m2m values in place of triggering the "set" and "add" event pairs.
 
+TO-TEST
+
+*( ) Events (again, including the error handling event).
+*( ) Initialization (in contrast with normal setting/adding).
+
+Version 1.0.4:
+
 TO-TEST:
 
-* edition of existing speaker instance (for the initial values).
-  * check why the "values" parameter is converted from it's json form to a python list.
-    * think a workaround for that behavior or a way to take advantage of it.
-  * check if values are initialized according to what we expect if initialize it manually in multiselect lists.
-  * check if existing object's saving works as new object's saving does.
-* events (both before and after the addition of the error handling events).
+*(x) edition of existing speaker instance (for the initial values).
+  *(x) check why the "values" parameter is converted from it's json form to a python list.
+    *(x) think a workaround for that behavior or a way to take advantage of it.
+  *(x) check if values are initialized according to what we expect if initialize it manually in multiselect lists.
+  *(x) check if existing object's saving works as new object's saving does.
+*( ) events.
+
+NOTE: this code has an example of sourcing from local cache AND remote database.
+(simple URL source performs a lookup and gets a JSON response using GET. this
+sample code is the exact same except for the caching code).
+
+$( "#birds" ).autocomplete({
+    minLength: 2,
+    source: function( request, response ) {
+        var term = request.term;
+        if ( term in cache ) {
+            response( cache[ term ] );
+            return;
+        }
+
+        $.getJSON( "search.php", request, function( data, status, xhr ) {
+            cache[ term ] = data;
+            response( data );
+        });
+    }
+});
