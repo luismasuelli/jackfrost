@@ -1,6 +1,22 @@
-Flaws or things to improve in this component:
+Architectural flaws or things to improve in this component:
 
 * the autocomplete search is only done against database. no cache is done.
   (reason: the jQuery component does not allow multisourcing).
-* the multichoice component doesn't work against M2M relationships with THROUGH set,
+* the multichoice component doesn't work against M2M relationships with THROUGH set.
   (reason: the values are SET checking the objects against the query in the other side of the relationship, not the intermediary values).
+
+Version 1.0.5:
+
+TO-DO:
+
+* error handling events for the autocomplete hit (letting the users notify theirself about the error).
+* initialization events for the fk and m2m values in place of triggering the "set" and "add" event pairs.
+
+TO-TEST:
+
+* edition of existing speaker instance (for the initial values).
+  * check why the "values" parameter is converted from it's json form to a python list.
+    * think a workaround for that behavior or a way to take advantage of it.
+  * check if values are initialized according to what we expect if initialize it manually in multiselect lists.
+  * check if existing object's saving works as new object's saving does.
+* events (both before and after the addition of the error handling events).
