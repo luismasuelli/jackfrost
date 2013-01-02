@@ -316,7 +316,7 @@ function jackfrost_multichoice($,
         wrapper_hidden.val("[]");
         if (initialdata != null)
         {
-            var params = {value: initialdata};
+            var params = {values: initialdata};
             var callback = function(data){
                 $.each(data, function(i, item){
                     __jackfrost_multichoice_addvalue(item, wrapper_list, wrapper_text, wrapper_hidden);
