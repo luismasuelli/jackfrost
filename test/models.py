@@ -27,11 +27,6 @@ class Speaker(models.Model):
     def __unicode__(self):
         return self.name
 
-#podemos crear un formulario de modelo o un formulario normal, pero si usamos controles
-#con autocompletar nuestro formulario debe ser tipo AutocompleteForm en lugar de Form,
-#o bien AutocompleteModelForm en lugar de ModelForm. esto nos permite ciertos metodos
-#para incluir media de jquery e incluso cambiar tematicas.
-#
 #cuando creamos nuestro formulario para el modelo, es importante recalcar que los campos
 #que queremos que sean de Autocompletar tengan ese tipo de campo. en tal momento tenemos
 #que asegurarnos de especificarle como uno de los parametros el nombre de la fuente de
@@ -49,24 +44,6 @@ class Speaker(models.Model):
 #otra cosa es que los campos que serán listados están preparados para actuar con su
 #widget predeterminado, por lo que asignarles otro widget será totalmente ignorado.
 #
-#los campos AC que podemos usar son los siguientes:
-#
-#  AutocompleteCharField : un campo de texto con capacidad de autocompletar.
-#    parametros de constructor:
-#    1. lookup_name = el nombre del lookup que hayamos definido como se explica en urls.py
-#    *args, **kwargs: los necesarios para el CharField de django (form fields).
-#
-#  AutocompleteModelChoiceField : un campo de referencia N:1 con capacidad de autocompletar.
-#    parametros de constructor:
-#    1. lookup_name = el nombre del lookup que hayamos definido como se explica en urls.py
-#    *args, **kwargs: los necesarios para el Field de django (form fields).
-#
-#  AutocompleteModelMultipleChoiceField: un campo de referencia N:N con capacidad de autocompletar
-#    cada una de las opciones que son buscadas. un control html de lista acumula las opciones
-#    mientras que un hidden realmente es quien acumula los valores para enviar al servidor.
-#    parametros del constructor:
-#    1. lookup_name = el nombre del lookup que hayamos definido como se explica en urls.py
-#    *args, **kwargs: los necesarios para el Field de django (form fields).
 #
 #otro tema sumamente importante: cuando vayamos a validar un campo que tenga autocompletares,
 #y mas que nada los que son referenciantes (simples o multiples), tenemos que invocar con

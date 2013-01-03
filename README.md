@@ -131,6 +131,7 @@ In the forms declarations:
   * AutocompleteModelChoiceField (replaces ModelChoiceField in ForeignKey)
   * AutocompleteModelMultipleChoiceField (replaces ModelMultipleChoiceField in ManyToMany)
   (You cannot, and you should not, change the widgets).
+  (They can take more **kwargs params, the same as the fields they replace).
 
 * Declare your ModelForm and override their fields as follows:
 For each field you want to convert to it's autocomplete version, just override it
@@ -149,9 +150,18 @@ non-AutoComplete form field). Overriding is as follows:
   #REMEMBER THAT IN THE FOREIGN KEY AND MANY-TO-MANY FIELDS THERE'S A HIDDEN
   #INPUT THAT CONTAINS THE REAL ID AND VALUE TO SEND TO THE SERVER.
 
+In the template
 * Including media in the template:
 DON'T FORGET TO INCLUDE THE form.media REFERENCE IN THE TEMPLATE OR ELSE THESE
 COMPONENTS WILL NOT WORK (these would happen with every django components app -.-'').
+
+In the receiving view
+* The form validation can be done BUT a preparing call must be done if you
+  specified a custom filter for the source (i.e. a filter taking the queryset and
+  the current request): from jackfrost.fields import the AutocompleteField class
+  and call AutocompleteField.set_request_in_each_field(form, request) where
+  "form" is the bound form ready to validate and "request" is the current request.
+  AFTER that, you can invoke the form validation or access it's errors list.
 
 ===========
 Customizing
