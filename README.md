@@ -12,7 +12,12 @@ the server side.
 Installing
 ==========
 
-Put the application package named jackfrost in your project.
+Put the application package named jackfrost in your project. The application
+package is named jackfrost and is inside as the project directory, but located
+in the same level of this file (i.e. installed as an app before jackfrost_app
+and test in this project). It is safe to copy the application package as is
+to your project.
+
 In settings.py:
 * Install the application.
 * Customize the jQuery library (static files) in these variables:
