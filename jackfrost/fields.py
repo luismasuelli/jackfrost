@@ -79,19 +79,6 @@ class AutocompleteCharField(AutocompleteField, CharField):
 class AutocompleteModelChoiceField(AutocompleteField, Field):
     """
     Model choice field with autocomplete facilities.
-
-    At creation takes additional parameters:
-        before_del: event handler to trigger before the element is being deleted
-        after_del: event handler to trigger after the element is being deleted
-        before_set: event handler to trigger before the element is being set
-        after_set: event handler to trigger after the element is being set
-
-        (any handler can be omitted (passing null or undefined).
-        each handler has the signature: function())
-
-        renderer: handler to draw custom autocompleted items
-
-        (it's signature is: function())
     """
 
     default_error_messages = {
@@ -99,8 +86,6 @@ class AutocompleteModelChoiceField(AutocompleteField, Field):
                             u' the available choices.'),
     }
 
-    #additional widget_attrs are:
-    #  before_del, after_del, before_set, after_set : events
     def __init__(self, lookup_name, *args, **kwargs):
         kwargs.pop('widget', 1) #dummy True value, to remove widget argument
         Field.__init__(self, widget=AutocompleteSelect(lookup_name, kwargs.pop('widget_attrs')), *args, **kwargs) #setting current widget as  an autocomplete text input
@@ -138,19 +123,6 @@ class AutocompleteModelMultipleChoiceField(AutocompleteField, Field):
     """
     Multiple model choice field with autocomplete facilities. does a post to retrieve
     data using a large amount of identifiers.
-
-    At creation takes additional parameters:
-        before_rem: event handler to trigger before an element is being removed
-        after_rem: event handler to trigger after an element was removed
-        before_add: event handler to trigger before an element is being added
-        after_ren: event handler to trigger after an element was added
-
-        (any handler can be omitted (passing null or undefined).
-        each handler has the signature: function())
-
-        renderer: handler to draw custom autocompleted items
-
-        (it's signature is: function())
     """
 
     default_error_messages = {
