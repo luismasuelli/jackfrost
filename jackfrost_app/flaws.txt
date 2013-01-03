@@ -26,7 +26,7 @@ TO-TEST:
     *(x) think a workaround for that behavior or a way to take advantage of it.
   *(x) check if values are initialized according to what we expect if initialize it manually in multiselect lists.
   *(x) check if existing object's saving works as new object's saving does.
-*( ) events.
+*(x) events.
 
 NOTE: this code has an example of sourcing from local cache AND remote database.
 (simple URL source performs a lookup and gets a JSON response using GET. this
