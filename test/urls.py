@@ -16,11 +16,15 @@ def eggsfinder(request, context):
     terms = term.lower().split()
     return "eggs" in terms
 
+def test_filter(query, request):
+    print "filtrando la request " + str(request)
+    return query
+
 lookups.register(
     r'^speakers-%s/$',
     'test_app.speakers',
     Speaker.objects.all(),
-    None,
+    test_filter,
     ('name',),
     throw403_if=spamfinder,
     throw404_if=eggsfinder
@@ -30,7 +34,7 @@ lookups.register(
     r'^languages-%s/$',
     'test_app.languages',
     Language.objects.all(),
-    None,
+    test_filter,
     ('name',),
     throw403_if=spamfinder,
     throw404_if=eggsfinder
@@ -40,7 +44,7 @@ lookups.register(
     r'^groups-%s/$',
     'test_app.groups',
     Group.objects.all(),
-    None,
+    test_filter,
     ('description',),
     throw403_if=spamfinder,
     throw404_if=eggsfinder

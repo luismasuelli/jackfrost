@@ -9,9 +9,12 @@ class AutocompleteMiddleware(object):
 
     def process_template_response(self, request, response):
         AutocompleteField.unset_request(request)
+        return response
 
     def process_response(self, request, response):
         AutocompleteField.unset_request(request)
+        return response
 
     def process_exception(self, request, response):
         AutocompleteField.unset_request(request)
+        return response
