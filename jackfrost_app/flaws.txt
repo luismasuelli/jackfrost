@@ -16,6 +16,8 @@ TO-TEST
 
 *( ) Events (again, including the error handling event).
 *( ) Initialization (in contrast with normal setting/adding).
+*{ } Allow caching/multisourcing.
+*{ } Intensive documentation!
 
 Version 1.0.4:
 
