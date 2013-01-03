@@ -15,6 +15,6 @@ class AutocompleteMiddleware(object):
         AutocompleteField.unset_request(request)
         return response
 
-    def process_exception(self, request, response):
+    def process_exception(self, request, exception):
         AutocompleteField.unset_request(request)
-        return response
+        return None
