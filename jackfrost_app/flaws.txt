@@ -15,8 +15,8 @@ TO-TEST
 
 *( ) Events (again, including the error handling event).
 *( ) Initialization (in contrast with normal setting/adding).
-*{ } Allow caching/multisourcing.
-*{ } Intensive documentation!
+*( ) Allow caching/multisourcing.
+*(x) Intensive documentation!
 
 NOTE: this code has an example of sourcing from local cache AND remote database.
 (simple URL source performs a lookup and gets a JSON response using GET. this
