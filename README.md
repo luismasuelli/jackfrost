@@ -21,6 +21,8 @@ In settings.py:
   (Note: the application ships with a version of jquery, jqueryui, and a theme.
    If one or more of these settings are not specified, their shipped defaults
    will be used instead).
+* Add the middleware jackfrost.middlewares.AutocompleteMiddleware to the
+  middlewares tuple.
 
 =====
 Using
@@ -154,14 +156,6 @@ In the template
 * Including media in the template:
 DON'T FORGET TO INCLUDE THE form.media REFERENCE IN THE TEMPLATE OR ELSE THESE
 COMPONENTS WILL NOT WORK (these would happen with every django components app -.-'').
-
-In the receiving view
-* The form validation can be done BUT a preparing call must be done if you
-  specified a custom filter for the source (i.e. a filter taking the queryset and
-  the current request): from jackfrost.fields import the AutocompleteField class
-  and call AutocompleteField.set_request_in_each_field(form, request) where
-  "form" is the bound form ready to validate and "request" is the current request.
-  AFTER that, you can invoke the form validation or access it's errors list.
 
 ===========
 Customizing

@@ -13,6 +13,7 @@ from django.forms import ValidationError
 from django.db.models import Model
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
+from threading import local
 
 class AutocompleteFieldError(AutocompleteError):
     pass
@@ -22,7 +23,7 @@ class AutocompleteField(object):
     """
     Autocomplete field:
       Allows access to lookups and so.
-      It also allows specifying a request for the field so it can perform
+      It also has threadlocals specifying a request for the field so it can perform
       custom validation. That validation is performed against a filtered
       queryset: a (mandatory) model to filter and a (non-mandatory) callable
       taking two arguments: the queryset to filter (with a starting value of
@@ -31,13 +32,14 @@ class AutocompleteField(object):
       get only model objects related to that user, and many additional examples.
     """
 
+    DATA = local()
+
     def __init__(self, lookup_name):
         """
         Sets the current lookup name. It does not yet evaluate the validity.
         Validity is lazy-evaluated.
         """
         self._lookup_name = lookup_name
-        self._request = None
 
     def _get_lookup(self):
         """
@@ -51,25 +53,20 @@ class AutocompleteField(object):
         except Exception as e:
             return AutocompleteFieldError("Unregistered '%s' autocomplete lookup" % self._lookup_name)
 
-    def _set_request(self, request):
-        """
-        Called by set_request_in_each_field to set the current request
-        in this field.
-        """
-        self._request = request
+    @staticmethod
+    def set_request(request):
+        AutocompleteField.DATA.request = request
 
     @staticmethod
-    def set_request_in_each_field(form, request):
-        """
-        This method runs each form field, affecting only AutocompleteFields.
-        Sets the current request. This is useful only for clean purposes.
-        This method must be called before any clean operation takes place.
-        A good point where to call this method may be after the form
-        creation. Note: this is a static method.
-        """
-        for field in form.fields:
-            if isinstance(field, (AutocompleteField,)):
-                field._set_request(request)
+    def unset_request(request):
+        AutocompleteField.DATA.request = None
+
+    @staticmethod
+    def get_request():
+        try:
+            return AutocompleteField.DATA.request
+        except AttributeError as e:
+            return None
 
 
 class AutocompleteCharField(AutocompleteField, CharField):
@@ -121,7 +118,7 @@ class AutocompleteModelChoiceField(AutocompleteField, Field):
         elif value is None:
             return None
 
-        return lookup.clean_fk(value, self._request, errors)
+        return lookup.clean_fk(value, AutocompleteField.get_request(), errors)
 
     def clean(self, value):
         if self.required and not value:
@@ -186,7 +183,7 @@ class AutocompleteModelMultipleChoiceField(AutocompleteField, Field):
         if not isinstance(values, (list, tuple)):
             raise ValidationError(self.error_messages['list'])
 
-        return lookup.clean_m2m((self._single_value_to_python(v) for v in values), self._request, errors)
+        return lookup.clean_m2m((self._single_value_to_python(v) for v in values), AutocompleteField.get_request(), errors)
 
     def clean(self, values):
         if self.required and not values:
