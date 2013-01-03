@@ -186,8 +186,6 @@ class AutocompleteModelMultipleChoiceField(AutocompleteField, Field):
         return lookup.clean_m2m((self._single_value_to_python(v) for v in values), AutocompleteField.get_request(), errors)
 
     def clean(self, values):
-        values = u'[' + values[1: -1] + u']'
-
         if self.required and not values:
             raise ValidationError(self.error_messages['required'])
 

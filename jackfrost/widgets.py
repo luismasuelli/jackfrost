@@ -148,6 +148,9 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
     Validates the list of values against a source.
     """
 
+    def value_from_datadict(self, data, files, name):
+        return u'[' + data[name][1 : -1] + u']'
+
     def __init__(self, lookup_name, attrs=None):
         Input.__init__(self, attrs)
         AutocompleteWidget.__init__(self, lookup_name, attrs)
