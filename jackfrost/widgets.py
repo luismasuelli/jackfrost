@@ -88,6 +88,9 @@ class AutocompleteSelect(AutocompleteWidget, Input):
     Simple model choice field whose value comes from a source and validates against it.
     """
 
+    def value_from_datadict(self, data, files, name):
+        return simplejson.loads(data[name])
+
     def __init__(self, lookup_name, attrs=None):
         Input.__init__(self, attrs)
         AutocompleteWidget.__init__(self, lookup_name, attrs)
@@ -149,7 +152,7 @@ class AutocompleteSelectMultiple(AutocompleteWidget, Input):
     """
 
     def value_from_datadict(self, data, files, name):
-        return u'[' + data[name][1 : -1] + u']'
+        return simplejson.loads(u'[' + data[name][1 : -1] + u']')
 
     def __init__(self, lookup_name, attrs=None):
         Input.__init__(self, attrs)

@@ -95,9 +95,6 @@ class AutocompleteModelChoiceField(AutocompleteField, Field):
         lookup = self._get_lookup()
         errors = self.error_messages
 
-        if isinstance(value, (str, unicode)):
-            value = simplejson.loads(value)
-
         if isinstance(value, Model):
             value = value.serializable_value(lookup.to_field_name)
         elif value is None:
@@ -146,9 +143,6 @@ class AutocompleteModelMultipleChoiceField(AutocompleteField, Field):
     def to_python(self, values):
         lookup = self._get_lookup()
         errors = self.error_messages
-
-        if isinstance(values, (str, unicode)):
-            values = simplejson.loads(values)
 
         if not values:
             values = []
