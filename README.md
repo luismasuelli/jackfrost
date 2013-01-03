@@ -163,6 +163,15 @@ In the template
 DON'T FORGET TO INCLUDE THE form.media REFERENCE IN THE TEMPLATE OR ELSE THESE
 COMPONENTS WILL NOT WORK (these would happen with every django components app -.-'').
 
+=======
+Warning
+=======
+
+* Form/Field initial values:
+
+For ajax compatibility, if you want to set INITIALS for this field in the form, you MUST convert
+that value to json using simplejson.loads(value).
+
 ===========
 Customizing
 ===========
