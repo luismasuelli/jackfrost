@@ -30,7 +30,7 @@ def autocomplete_search(request, queryset, filter, field_list, limit=15, to_fiel
     return _json_response(json_list(search_queryset[:limit], to_field_name, extra_data_getter))
 
 def autocomplete_fk_initial(request, queryset, filter, to_field_name='pk', throw403_if=None, throw404_if=None, extra_data_getter=None):
-    error = _autocomplete_error(request, throw403_if, throw404_if, 'fk')
+    error = _autocomplete_error(request, throw403_if, throw404_if, 'one')
     if error is not None:
         return error
     try:
@@ -42,7 +42,7 @@ def autocomplete_fk_initial(request, queryset, filter, to_field_name='pk', throw
 
 @csrf_exempt
 def autocomplete_m2m_initials(request, queryset, filter, to_field_name='pk', throw403_if=None, throw404_if=None, extra_data_getter=None):
-    error = _autocomplete_error(request, throw403_if, throw404_if, 'm2m')
+    error = _autocomplete_error(request, throw403_if, throw404_if, 'many')
     if error is not None:
         return error
     try:

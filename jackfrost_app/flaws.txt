@@ -5,11 +5,10 @@ Architectural flaws or things to improve in this component:
 * the multichoice component doesn't work against M2M relationships with THROUGH set.
   (reason: the values are SET checking the objects against the query in the other side of the relationship, not the intermediary values).
 
-Version 1.0.5:
-
 TO-DO:
 
 * error handling events for the autocomplete hit (letting the users notify theirself about the error).
+* custom per-channel captions (allowing a fallback to __unicode__() in the model if not custom caption generator specified).
 * initialization events for the fk and m2m values in place of triggering the "set" and "add" event pairs.
 
 TO-TEST
@@ -18,17 +17,6 @@ TO-TEST
 *( ) Initialization (in contrast with normal setting/adding).
 *{ } Allow caching/multisourcing.
 *{ } Intensive documentation!
-
-Version 1.0.4:
-
-TO-TEST:
-
-*(x) edition of existing speaker instance (for the initial values).
-  *(x) check why the "values" parameter is converted from it's json form to a python list.
-    *(x) think a workaround for that behavior or a way to take advantage of it.
-  *(x) check if values are initialized according to what we expect if initialize it manually in multiselect lists.
-  *(x) check if existing object's saving works as new object's saving does.
-*(x) events.
 
 NOTE: this code has an example of sourcing from local cache AND remote database.
 (simple URL source performs a lookup and gets a JSON response using GET. this
