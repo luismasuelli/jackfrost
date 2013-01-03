@@ -14,11 +14,11 @@
         }
 
         function ss_before_set(event, key, obj) {
-            log_console("before inserting " + key + " for " + JSON.stringify(obj));
+            log_console("before setting " + key + " for " + JSON.stringify(obj));
         }
 
         function ss_after_set(event, key, obj) {
-            log_console("after inserting " + key + " for " + JSON.stringify(obj));
+            log_console("after setting " + key + " for " + JSON.stringify(obj));
         }
 
         function ss_before_del(event, key) {
