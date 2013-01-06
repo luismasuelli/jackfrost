@@ -29,7 +29,7 @@ def sample_form(request):
             instance = get_object_or_404(Speaker, pk=instance_id)
             form = SpeakerForm(instance=instance)
         else:
-            form = SpeakerForm()
+            form = SpeakerForm(initial={u'languages': [1, 2], u'group': 1})
         return render_to_response('test/form.html', {'form': form}, context_instance=RequestContext(request))
     else:
         return http.HttpResponseNotAllowed(['GET', 'POST'])
