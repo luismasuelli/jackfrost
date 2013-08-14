@@ -156,7 +156,7 @@ Future Improvements
 
 * Customizing AJAX error handling (a new event).
 * Customizing the model object caption in a per-channel way and not just the model's
-  __unicode__ method (keeping it as the default option).
+  \_\___unicode__\_\_ method (keeping it as the default option).
 * Initialization events for the components (distinguishing them from the set/add
   events).
 * Caching/multisourcing.
@@ -171,5 +171,5 @@ Other known limitations are explained in the Future Improvements section.
 Contact info
 ============
 
-You can contact me for bugs, suggestions and doubts to malavon_despana@hotmail.com.
+You can contact me for bugs, suggestions and doubts to luismasuelli@hotmail.com.
 Please put in the subject "jackfrost django app" so I can distinguish that mail from the bulk i usually delete.
