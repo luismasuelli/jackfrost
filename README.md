@@ -78,8 +78,7 @@ In module __jackfrost.lookups__ a variable named __registered_lookups__ will ref
     \#the original urls (you can add other urls to the patterns call but watch out  
     \#for name collisions).  
 
-
-In the forms declarations:
+3. In the forms declarations:
 
 * Import the needed fields from jackfrost.fields module:
     * AutocompleteCharField (an improved CharField with autocomplete in CharField).  
@@ -103,7 +102,7 @@ In the forms declarations:
     \#REMEMBER THAT IN THE FOREIGN KEY AND MANY-TO-MANY FIELDS THERE'S A HIDDEN  
     \#INPUT THAT CONTAINS THE REAL ID AND VALUE TO SEND TO THE SERVER.  
 
-In the template:
+4. In the template:
 
 * Including media in the template:
 DON'T FORGET TO INCLUDE THE __form.media__ REFERENCE IN THE TEMPLATE. OTHERWISE THESE COMPONENTS WILL NOT WORK (these would happen with every django components app -.-'').
