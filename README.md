@@ -80,13 +80,13 @@ In module __jackfrost.lookups__ a variable named __registered_lookups__ will ref
 
 3. In the forms declarations:
 
-* Import the needed fields from jackfrost.fields module:
-    * AutocompleteCharField (an improved CharField with autocomplete in CharField).  
-    * AutocompleteModelChoiceField (replaces ModelChoiceField in ForeignKey).  
-    * AutocompleteModelMultipleChoiceField (replaces ModelMultipleChoiceField in ManyToMany).  
+    * Import the needed fields from jackfrost.fields module:
+        * AutocompleteCharField (an improved CharField with autocomplete in CharField).
+        * AutocompleteModelChoiceField (replaces ModelChoiceField in ForeignKey).
+        * AutocompleteModelMultipleChoiceField (replaces ModelMultipleChoiceField in ManyToMany).
 
-(You cannot, and you should not, change the widgets).  
-(They can take more **kwargs params, the same as the fields they replace).  
+    (You cannot, and you should not, change the widgets).
+    (They can take more **kwargs params, the same as the fields they replace).
 
 * Declare your ModelForm and override their fields as follows: For each field you want to convert to it's autocomplete version, just override it by declaring it as a new file (matching the model field name) as explained in the last paragraph (which AutocompleteField is intended for which Model field or non-AutoComplete form field). Overriding is as follows:
 
@@ -104,8 +104,7 @@ In module __jackfrost.lookups__ a variable named __registered_lookups__ will ref
 
 4. In the template:
 
-* Including media in the template:
-DON'T FORGET TO INCLUDE THE __form.media__ REFERENCE IN THE TEMPLATE. OTHERWISE THESE COMPONENTS WILL NOT WORK (these would happen with every django components app -.-'').
+    * DON'T FORGET TO INCLUDE THE __form.media__ REFERENCE IN THE TEMPLATE. OTHERWISE THESE COMPONENTS WILL NOT WORK (these would happen with every django components app -.-'').
 
 Customizing
 ===========
