@@ -79,12 +79,10 @@ In module __jackfrost.lookups__ a variable named __registered_lookups__ will ref
     \#for name collisions).  
 
 3. In the forms declarations:
-
     * Import the needed fields from jackfrost.fields module:
         * AutocompleteCharField (an improved CharField with autocomplete in CharField).
         * AutocompleteModelChoiceField (replaces ModelChoiceField in ForeignKey).
         * AutocompleteModelMultipleChoiceField (replaces ModelMultipleChoiceField in ManyToMany).
-
     (You cannot, and you should not, change the widgets).
     (They can take more **kwargs params, the same as the fields they replace).
 
@@ -103,7 +101,6 @@ In module __jackfrost.lookups__ a variable named __registered_lookups__ will ref
     \#INPUT THAT CONTAINS THE REAL ID AND VALUE TO SEND TO THE SERVER.  
 
 4. In the template:
-
     * DON'T FORGET TO INCLUDE THE __form.media__ REFERENCE IN THE TEMPLATE. OTHERWISE THESE COMPONENTS WILL NOT WORK (these would happen with every django components app -.-'').
 
 Customizing
