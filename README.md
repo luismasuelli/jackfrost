@@ -15,8 +15,7 @@ In settings.py:
 * Customize the jQuery library (static files) in these variables (Note: the application ships with a version of jquery, jqueryui, and a theme. If one or more of these settings are not specified, their shipped defaults will be used instead):
     * JACKFROST_JQUERY_LIB : path to the jquery library.
     * JACKFROST_JQUERYUI_LIB : path to the jquery-ui library.
-    * JACKFROST_JQUERYUI_CSS : path to the theme to use by the application.  
-* Add the middleware jackfrost.middlewares.AutocompleteMiddleware to the middlewares tuple.
+    * JACKFROST_JQUERYUI_CSS : path to the theme to use by the application.
 
 Using
 =====
