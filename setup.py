@@ -3,7 +3,7 @@ import os
 
 setup(
     name='jackfrost',
-    version='0.5.1',
+    version='0.5.2',
     packages=['jackfrost'],
     package_data={'jackfrost': [os.path.join('static', 'css', 'themes', 'base', 'images', '*.png'),
                                 os.path.join('static', 'css', 'themes', 'base', '*.css'),
