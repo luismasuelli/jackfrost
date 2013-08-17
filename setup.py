@@ -1,9 +1,13 @@
 from distutils.core import setup
+import os
 
 setup(
     name='jackfrost',
     version='0.5.1',
     packages=['jackfrost'],
+    package_data={'jackfrost': [os.path.join('static', 'css', 'themes', 'base', 'images', '*.png'),
+                                os.path.join('static', 'css', 'themes', 'base', '*.css'),
+                                os.path.join('static', 'css', '*.js')]},
     url='',
     license='GPL',
     author='Luis Masuelli',
