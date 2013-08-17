@@ -22,10 +22,10 @@ function __jackfrost_autocomplete_on_render(wrapper, ul, item) {
  *
  */
 
-function __jackfrost_autocomplete_render(wrapper_hidden, ul, item) {
+function __jackfrost_autocomplete_render(wrapper_text, ul, item) {
     return $( "<li></li>" )
         .data( "item.autocomplete", item )
-        .append(__jackfrost_autocomplete_on_render(wrapper_hidden, ul, item))
+        .append(__jackfrost_autocomplete_on_render(wrapper_text, ul, item))
         .appendTo( ul );
 }
 
@@ -48,11 +48,15 @@ function __jackfrost_autocomplete_render(wrapper_hidden, ul, item) {
  *
  */
 
-function jackfrost_input($, id, source){
+function jackfrost_input($, id, source, renderer){
     $(function(){
-        $("#" + id).autocomplete({
+        var wrapper_text = $("#" + id);
+        wrapper_text.autocomplete({
             source: source
-        });
+        }).data( "autocomplete" )._renderItem = function(ul, item){
+            return __jackfrost_autocomplete_render(wrapper_text, ul, item);
+        };
+        if (typeof renderer != 'undefined') wrapper_text.bind("render", renderer);
     });
 }
 
@@ -154,7 +158,7 @@ function jackfrost_singlechoice($,
                 __jackfrost_singlechoice_setvalue(ui.item, wrapper_text, wrapper_hidden);
             }
         }).data( "autocomplete" )._renderItem = function(ul, item){
-            return __jackfrost_autocomplete_render(wrapper_hidden, ul, item);
+            return __jackfrost_autocomplete_render(wrapper_text, ul, item);
         };
 
         wrapper_text.keydown(function(e){
@@ -174,7 +178,7 @@ function jackfrost_singlechoice($,
         if (typeof after_del != 'undefined') wrapper_hidden.bind("afterDelete", after_del);
         if (typeof before_set != 'undefined') wrapper_hidden.bind("beforeSet", before_set);
         if (typeof after_set != 'undefined') wrapper_hidden.bind("afterSet", after_set);
-        if (typeof renderer != 'undefined') wrapper_hidden.bind("render", renderer);
+        if (typeof renderer != 'undefined') wrapper_text.bind("render", renderer);
     });
 }
 
@@ -293,7 +297,7 @@ function jackfrost_multichoice($,
                 __jackfrost_multichoice_addvalue(ui.item, wrapper_list, wrapper_text, wrapper_hidden);
             }
         }).data( "autocomplete" )._renderItem = function(ul, item){
-            return __jackfrost_autocomplete_render(wrapper_hidden, ul, item);
+            return __jackfrost_autocomplete_render(wrapper_text, ul, item);
         };
 
         wrapper_list.keydown(function(e){
@@ -336,7 +340,7 @@ function jackfrost_multichoice($,
         if (typeof after_rem != 'undefined') wrapper_hidden.bind("afterRemove", after_rem);
         if (typeof before_add != 'undefined') wrapper_hidden.bind("beforeAdd", before_add);
         if (typeof after_add != 'undefined') wrapper_hidden.bind("afterAdd", after_add);
-        if (typeof renderer != 'undefined') wrapper_hidden.bind("render", renderer);
+        if (typeof renderer != 'undefined') wrapper_text.bind("render", renderer);
     });
 }
 

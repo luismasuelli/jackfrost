@@ -10,7 +10,7 @@ from django.forms import Media
 from django.utils.encoding import force_unicode
 from django.forms.util import flatatt
 from django.forms.widgets import Widget
-from django.utils import simplejson
+import json as simplejson
 import uuid
 
 
@@ -67,18 +67,20 @@ class AutocompleteTextInput(AutocompleteWidget, TextInput):
     def render_jquery_autocomplete(self, attrs):
         url = self._get_lookup().reverse_autocomplete_url()
         id = attrs['id']
+        custom_renderer = attrs.get('renderer', 'undefined')
         autocomplete_textinput_template = u"""
         <script>
           (function($){
             $(function(){
-              jackfrost_input($, %s, %s);
+              jackfrost_input($, %s, %s, %s);
             });
           })(jQuery);
         </script>
         """
         texto = autocomplete_textinput_template % (
             simplejson.dumps(id),
-            simplejson.dumps(url)
+            simplejson.dumps(url),
+            simplejson.dumps(custom_renderer)
         )
         return mark_safe(texto)
 
