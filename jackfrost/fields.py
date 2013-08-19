@@ -72,7 +72,7 @@ class AutocompleteField(object):
 class AutocompleteCharField(AutocompleteField, CharField):
     def __init__(self, lookup_name, *args, **kwargs):
         kwargs.pop('widget', 1) #dummy True value, to remove widget argument
-        CharField.__init__(self, widget=AutocompleteTextInput(lookup_name), *args, **kwargs) #setting current widget as  an autocomplete text input
+        CharField.__init__(self, widget=AutocompleteTextInput(lookup_name, kwargs.pop('widget_attrs')), *args, **kwargs) #setting current widget as  an autocomplete text input
         AutocompleteField.__init__(self, lookup_name)
 
 

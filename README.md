@@ -107,6 +107,8 @@ Customizing
 The components can be customized in several ways.
 
 * The __extra_data_getter__ can be used to bring more data about the instance (it would be used to custom-render or consider at events).
+    * List item rendering function.
+        * __renderer__: A function with signature function(event, key, object).
 * For __AutocompleteModelChoiceField__ component, __widget_attrs__ may be specified containing expressions returning javascript event handlers (i.e. callback functions) whose signatures are:
     * Element assignment event:
         * __before_set__: A function with signature function(Event, key, object).  
@@ -120,8 +122,8 @@ If it returns false, the element is not deleted.
 Can safely have no return statement.  
         * __after_del__: A function with the same signature that before_del.  
 The return value is not taken into account.
-        * __renderer__: A function with signature function(event, key, object).  
-It must return an HTML string that will be the content for the rendered element. By not returning any value, the default jquery-ui rendering will be applied.  
+    * List item rendering function.
+        * __renderer__: A function with signature function(event, key, object).It must return an HTML string that will be the content for the rendered element. By not returning any value, the default jquery-ui rendering will be applied.
 (These events may be alternatively set in client-side by binding to the hidden input these functions in events __beforeSet__, __afterSet__, __beforeDelete__, __afterDelete__, and __render__).
 * For __AutocompleteModelMultipleChoiceField__ component, widget_attrs may be specified containing expressions returning javascript event handlers (i.e. callback functions) whose signatures are:
     * Element addition event (before and after):
@@ -136,7 +138,8 @@ The return value is not taken into account.
         Can safely have no return statement.
         * __after_rem__: A function with the same signature that __before_rem__.  
 The return value is not taken into account.
-        * __renderer__: A function with signature function(event, key, object).  
+    * List item rendering function.
+        * __renderer__: A function with signature function(event, key, object).
 It must return an HTML string that will be the content for the rendered element. By not returning any value, the default jquery-ui rendering will be applied.  
 (These events may be alternatively set in client-side by binding to the hidden input these functions in events __beforeAdd__, __afterAdd__, __beforeRemove__, __afterRemove__, and __render__).  
 
