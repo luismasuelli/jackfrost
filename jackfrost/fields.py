@@ -1,5 +1,5 @@
 # encoding: latin-1
-from django.utils import simplejson
+import json as simplejson
 
 __author__ = 'Usuario'
 
@@ -14,6 +14,7 @@ from django.db.models import Model
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from threading import local
+
 
 class AutocompleteFieldError(AutocompleteError):
     pass
