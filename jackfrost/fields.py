@@ -73,7 +73,7 @@ class AutocompleteField(object):
 class AutocompleteCharField(AutocompleteField, CharField):
     def __init__(self, lookup_name, *args, **kwargs):
         kwargs.pop('widget', 1) #dummy True value, to remove widget argument
-        CharField.__init__(self, widget=AutocompleteTextInput(lookup_name, kwargs.pop('widget_attrs')), *args, **kwargs) #setting current widget as  an autocomplete text input
+        CharField.__init__(self, widget=AutocompleteTextInput(lookup_name, kwargs.pop('widget_attrs', {})), *args, **kwargs) #setting current widget as  an autocomplete text input
         AutocompleteField.__init__(self, lookup_name)
 
 
@@ -89,7 +89,7 @@ class AutocompleteModelChoiceField(AutocompleteField, Field):
 
     def __init__(self, lookup_name, *args, **kwargs):
         kwargs.pop('widget', 1) #dummy True value, to remove widget argument
-        Field.__init__(self, widget=AutocompleteSelect(lookup_name, kwargs.pop('widget_attrs')), *args, **kwargs) #setting current widget as  an autocomplete text input
+        Field.__init__(self, widget=AutocompleteSelect(lookup_name, kwargs.pop('widget_attrs', {})), *args, **kwargs) #setting current widget as  an autocomplete text input
         AutocompleteField.__init__(self, lookup_name)
 
     def to_python(self, value):
@@ -131,7 +131,7 @@ class AutocompleteModelMultipleChoiceField(AutocompleteField, Field):
 
     def __init__(self, lookup_name, *args, **kwargs):
         kwargs.pop('widget', 1) #dummy True value, to remove widget argument
-        Field.__init__(self, widget=AutocompleteSelectMultiple(lookup_name, kwargs.pop('widget_attrs')), *args, **kwargs)
+        Field.__init__(self, widget=AutocompleteSelectMultiple(lookup_name, kwargs.pop('widget_attrs', {})), *args, **kwargs)
         AutocompleteField.__init__(self, lookup_name)
 
     def _single_value_to_python(self, value):
