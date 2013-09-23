@@ -2,4 +2,5 @@
 *.pot
 *.pyc
 .idea/*
+.idea
 local_settings.py
