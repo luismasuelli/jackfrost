@@ -36,7 +36,10 @@ def autocomplete_fk_initial(request, queryset, filter, to_field_name='pk', throw
     try:
         value = simplejson.loads(_req_val(request, 'value'))
         element = initial_fk(queryset, filter, request, to_field_name, value)
-        return _json_response(json_instance(element, to_field_name, extra_data_getter))
+        if element is None:
+            return _json_response(None)
+        else:
+            return _json_response(json_instance(element, to_field_name, extra_data_getter))
     except simplejson.JSONDecodeError as e:
         return _json_response(None)
 
