@@ -80,10 +80,10 @@ In module __jackfrost.lookups__ a variable named __registered_lookups__ will ref
 __PLEASE TAKE NOTE TO AVOID FUTURE HEADACHES: This application doesn't work with namespaces!!__  
 There's nothing as badly-designed as namespacing in django is. There are numerous issues with that regarding reusable applications.  
 This is because of two contradictory points in that feature's design:  
-    * It's (most of the time) the __application designer__ the one who creates the application templates and calls {% url %} and reverse() for application-specific urls.  
-        * So both calls force the designer to specify, at least, a fixed app_name.  
-    * It's the __application importer (a.k.a. user)__ the one who imports the urls with a namespace.  
-        * So it may accidentally override the app_name or namespace, and the above calls wouldn't resolve.  
+        * It's (most of the time) the __application designer__ the one who creates the application templates and calls {% url %} and reverse() for application-specific urls.  
+            * So both calls force the designer to specify, at least, a fixed app_name.  
+        * It's the __application importer (a.k.a. user)__ the one who imports the urls with a namespace.  
+            * So it may accidentally override the app_name or namespace, and the above calls wouldn't resolve.  
 Most of the time, the three-elements-tuple-technique is applied (as described in the django documentation, giving AdminSite as an example).  
 So, to avoid user headaches, as this application is reusable, you can give any name you want to your channels.  
 Just ensure and remember: __don't include the urls.py file with your jackfrost channels inside a namespace. Never. Despite the other urls your application have in that file NEVER do it.  
