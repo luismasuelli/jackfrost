@@ -54,6 +54,4 @@ urlpatterns = patterns('',
     url(r'^send/', sample_form, name="sampleform"),
     url(r'^ok/(\d+)/', sample_form_ok, name="sampleformok"),
   )\
-  + lookups.registered_lookups['test_app.languages'].urls\
-  + lookups.registered_lookups['test_app.speakers'].urls\
-  + lookups.registered_lookups['test_app.groups'].urls
+  + lookups.get_lookup_urls('test_app.languages','test_app.speakers','test_app.groups')

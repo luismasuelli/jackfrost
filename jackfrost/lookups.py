@@ -19,6 +19,12 @@ class JQACLookup(object):
     def reverse_m2m_initials_url(self):
         return reverse(self.name + '-many')
 
+def get_lookup_urls(*names):
+    urls = []
+    for name in names:
+        urls = urls + registered_lookups[name].urls
+    return urls
+
 def register(pattern, name, queryset, filter, field_list, limit=15, to_field_name='pk', throw403_if=None, throw404_if=None, extra_data_getter=None):
     if name in registered_lookups:
         return
