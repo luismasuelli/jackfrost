@@ -71,11 +71,9 @@ In module __jackfrost.lookups__ a variable named __registered_lookups__ will ref
 
     \#... more stuff here you would need  
 
-    url_patterns = patterns('',) + lookups.registered_lookups['myFirstChannel'].urls  
-    \#you can add (+) as many channels as you want because the .urls property returns  
-    \#a tuple with the 3 generated urls. in this case just one channel is added to  
-    \#the original urls (you can add other urls to the patterns call but watch out  
-    \#for name collisions).  
+    url_patterns = patterns('',) + lookups.get_lookup_urls('myFirstChannel')  
+    \#you can add in a single call as many channels as you want (this example adds only one channel)  
+    \#specifying them as more positional arguments.  
 
     __PLEASE TAKE NOTE TO AVOID FUTURE HEADACHES: This application doesn't work with namespaces!!__  
     There's nothing as badly-designed as namespacing in django is. There are numerous issues with that regarding reusable applications.  
