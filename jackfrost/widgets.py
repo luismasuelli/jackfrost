@@ -80,7 +80,7 @@ class AutocompleteTextInput(AutocompleteWidget, TextInput):
         texto = autocomplete_textinput_template % (
             simplejson.dumps(id),
             simplejson.dumps(url),
-            simplejson.dumps(custom_renderer)
+            custom_renderer
         )
         return mark_safe(texto)
 
